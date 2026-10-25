@@ -11,7 +11,7 @@ async function main() {
   // 创建 fanout 类型的交换机
   await channel.assertExchange(EXCHANGE, 'fanout', { durable: false });
 
-  console.log('[Publisher] 已连接，每 3 秒发送一次温度数据... (Ctrl+C 退出)');
+  console.log('[Publisher] Connected, sending temperature every 3 seconds... (Ctrl+C to exit) / 已连接，每 3 秒发送一次温度数据... (Ctrl+C 退出)');
 
   setInterval(() => {
     const message = {
@@ -24,7 +24,7 @@ async function main() {
 
     // fanout 交换机忽略 routing key，所以传空字符串
     channel.publish(EXCHANGE, '', Buffer.from(JSON.stringify(message)));
-    console.log('[Publisher] 已发送:', message);
+    console.log('[Publisher] Sent / 已发送:', message);
   }, 3000);
 
   process.on('SIGINT', async () => {
@@ -35,6 +35,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error('[Publisher] 错误:', err.message);
+  console.error('[Publisher] Error / 错误:', err.message);
   process.exit(1);
 });

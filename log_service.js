@@ -17,7 +17,7 @@ async function main() {
   const { queue } = await channel.assertQueue('', { exclusive: true });
   await channel.bindQueue(queue, EXCHANGE, '');
 
-  console.log(`[LogService] 等待温度数据，写入 ${LOG_FILE} ... (Ctrl+C 退出)`);
+  console.log(`[LogService] Waiting for temperature data, writing to ${LOG_FILE} ... (Ctrl+C to exit) / 等待温度数据，写入 ${LOG_FILE} ... (Ctrl+C 退出)`);
 
   channel.consume(
     queue,
@@ -26,13 +26,13 @@ async function main() {
       const data = JSON.parse(msg.content.toString());
       const line = `${data.timestamp},${data.sensor_id},${data.temperature}\n`;
       fs.appendFileSync(LOG_FILE, line);
-      console.log('[LogService] 已保存:', line.trim());
+      console.log('[LogService] Saved / 已保存:', line.trim());
     },
     { noAck: true }
   );
 }
 
 main().catch((err) => {
-  console.error('[LogService] 错误:', err.message);
+  console.error('[LogService] Error / 错误:', err.message);
   process.exit(1);
 });

@@ -14,7 +14,7 @@ async function main() {
   const { queue } = await channel.assertQueue('', { exclusive: true });
   await channel.bindQueue(queue, EXCHANGE, '');
 
-  console.log('[DisplayService] 等待温度数据... (Ctrl+C 退出)');
+  console.log('[DisplayService] Waiting for temperature data... (Ctrl+C to exit) / 等待温度数据... (Ctrl+C 退出)');
 
   channel.consume(
     queue,
@@ -22,7 +22,7 @@ async function main() {
       if (!msg) return;
       const data = JSON.parse(msg.content.toString());
       console.log(
-        `[DisplayService] 传感器 ${data.sensor_id} | 温度: ${data.temperature} °C | 时间: ${data.timestamp}`
+        `[DisplayService] Sensor 传感器: ${data.sensor_id} | Temperature 温度: ${data.temperature} °C | Time 时间: ${data.timestamp}`
       );
     },
     { noAck: true }
@@ -30,6 +30,6 @@ async function main() {
 }
 
 main().catch((err) => {
-  console.error('[DisplayService] 错误:', err.message);
+  console.error('[DisplayService] Error / 错误:', err.message);
   process.exit(1);
 });
