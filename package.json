@@ -1,0 +1,14 @@
+{
+  "name": "rabbitmq-temperature",
+  "version": "1.0.0",
+  "description": "Temperature sensor notification with RabbitMQ fanout exchange",
+  "main": "publisher.js",
+  "scripts": {
+    "publisher": "node publisher.js",
+    "display": "node display_service.js",
+    "log": "node log_service.js"
+  },
+  "dependencies": {
+    "amqplib": "^0.10.4"
+  }
+}

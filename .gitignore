@@ -1,0 +1,5 @@
+node_modules/
+check_env.bat
+check_result.txt
+setup.bat
+setup_log.txt
