@@ -3,3 +3,5 @@ check_env.bat
 check_result.txt
 setup.bat
 setup_log.txt
+push.bat
+push.tmp
